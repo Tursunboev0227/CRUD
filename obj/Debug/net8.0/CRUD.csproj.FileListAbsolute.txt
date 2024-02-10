@@ -17,3 +17,4 @@ C:\Users\USER\Desktop\HomeWork\Third Month\CRUD\obj\Debug\net8.0\refint\CRUD.dll
 C:\Users\USER\Desktop\HomeWork\Third Month\CRUD\obj\Debug\net8.0\CRUD.pdb
 C:\Users\USER\Desktop\HomeWork\Third Month\CRUD\obj\Debug\net8.0\CRUD.genruntimeconfig.cache
 C:\Users\USER\Desktop\HomeWork\Third Month\CRUD\obj\Debug\net8.0\ref\CRUD.dll
+C:\Users\USER\Desktop\HomeWork\Third Month\CRUD\obj\Debug\net8.0\CRUD.sourcelink.json

@@ -24,7 +24,16 @@ namespace CRUD
             //Servises.CRUD.InsertSeveralStudents(students);
             // Servises.CRUD.GetAll();
 
-          //  Servises.CRUD.GetById(1);
+            //  Servises.CRUD.GetById(1);
+            // Servises.CRUD.Delete(1);
+
+            /*            Students studentsForUpdate = new Students();
+                        studentsForUpdate.fullName = "Updated student";
+                        studentsForUpdate.grade = 1;
+                        studentsForUpdate.avg_score = 3;
+                        Servises.CRUD.UpdateStudent(studentsForUpdate, 3);*/
+
+            Servises.CRUD.UpdateAnyColumn(3, "full_name", "Abdullajon");
         }
     }
 }

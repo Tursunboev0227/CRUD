@@ -32,7 +32,7 @@ namespace CRUD.Servises
 
         public static void InsertIntoTable(Students student)
         {
-            using(NpgsqlConnection connection = new NpgsqlConnection(CONNECTIOnSTRING))
+            using (NpgsqlConnection connection = new NpgsqlConnection(CONNECTIOnSTRING))
             {
 
                 connection.Open();
@@ -46,7 +46,7 @@ namespace CRUD.Servises
                     Console.WriteLine("Something wrong with insert one student");
                 }
             }
-        } 
+        }
         public static void InsertSeveralStudents(List<Students> students)
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(CONNECTIOnSTRING))
@@ -121,5 +121,95 @@ namespace CRUD.Servises
                 }
             }
         }
+        public static void Delete(int id)
+        {
+            using (NpgsqlConnection connection = new NpgsqlConnection(CONNECTIOnSTRING))
+            {
+
+                connection.Open();
+                try
+                {
+                    using NpgsqlCommand cmd = new NpgsqlCommand(@$"delete from students where id = {id}", connection);
+                    var reader = cmd.ExecuteReader();
+                    Console.WriteLine("Succesfully deleted");
+                }
+                catch
+                {
+                    Console.WriteLine("Something wrong with deleting");
+                }
+            }
+        }
+        public static void UpdateStudent(Students student, int id)
+        {
+            using (NpgsqlConnection connection = new NpgsqlConnection(CONNECTIOnSTRING))
+            {
+
+                connection.Open();
+                try
+                {
+                    using NpgsqlCommand cmd = new NpgsqlCommand(@$"update students set full_name = '{student.fullName}',grade = {student.grade},avg_score = {student.avg_score} where id = {id}", connection);
+                    var reader = cmd.ExecuteReader();
+                    Console.WriteLine("Succesfully updated");
+                }
+                catch
+                {
+                    Console.WriteLine("Something wrong with updateing student");
+                }
+            }
+        }
+        public static void UpdateAnyColumn(int id, string column, string value)
+        {
+            using (NpgsqlConnection connection = new NpgsqlConnection(CONNECTIOnSTRING))
+            {
+                connection.Open();
+                try
+                {
+                    switch (column)
+                    {
+                        case "full_name":
+                            using (NpgsqlCommand cmd = new NpgsqlCommand($@"update students SET full_name = '{value}' where id = {id}", connection))
+                            {
+                                cmd.ExecuteNonQuery();
+                            }
+                            break;
+                        case "grade":
+                            if (int.TryParse(value, out int gradeValue))
+                            {
+                                using (NpgsqlCommand cmd = new NpgsqlCommand($@"UPDATE students SET grade = {gradeValue} WHERE id = {id}", connection))
+                                {
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid grade value");
+                            }
+                            break;
+                        case "avg_score":
+                            if (double.TryParse(value, out double avgScoreValue))
+                            {
+                                using (NpgsqlCommand cmd = new NpgsqlCommand($@"UPDATE students SET avg_score = {avgScoreValue} WHERE id = {id}", connection))
+                                {
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid average score value");
+                            }
+                            break;
+                        default:
+                            Console.WriteLine("Column does not exist");
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error updating student: {ex.Message}");
+                }
+            }
+        }
+
+
     }
 }
